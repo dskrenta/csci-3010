@@ -77,6 +77,8 @@ int main() {
   Book& book3Ref = book3;
   Book& book4Ref = book4;
 
+  // book3Ref == book4Ref
+
   // 9) Create two Book pointers to your Books from # 7.
   // use the == operator to test if they are equal. What happens?
   // if it succeeds, are these equal?
@@ -86,7 +88,15 @@ int main() {
   Book* book3Pointer = &book3;
   Book* book4Pointer = &book4;
 
+  // std::cout << book3Pointer == book4Pointer << std::endl;
+
   // 10) (Given in lecture)
 
+  // overloading: multipe methods or functions with the same name
+  //  void Dontate(Book b, int copies)
 
+  // overriding: when a function signature is the same as the base lass or an abstract function
+  // bool Point::operator==(const Point &first, const Point &other) {
+  //   return first.x_ == other.x_ && first.y_ == other.y_;
+  // }
 }
