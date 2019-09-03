@@ -19,7 +19,16 @@ void printPointDistances(Point p1, Point p2, Point p3) {
   cout << "Distance between Point1 and Point2: " << p1.distance(p2) << endl;
   cout << "Distance between Point2 and Point3: " << p2.distance(p3) << endl;
   cout << "Distance between Point3 and Point1: " << p3.distance(p1) << endl;
-  cout << endl;
+}
+
+/*
+    Prints point coordinates
+
+    @param point point passed point.
+    @return void.
+*/
+void printPoint(Point point) {
+  cout << "x: " << point.x << ", y: " << point.y << endl;
 }
 
 int main() {
@@ -39,17 +48,32 @@ int main() {
   // Print point distances
   printPointDistances(point1, point2, point3);
 
-  // Translate point positive amount
+  // Print points
+  printPoint(point1);
+  printPoint(point2);
+  printPoint(point3);
+
+  // Translate point by positive 5
   point1.translate(5);
 
   // Print point distances
   printPointDistances(point1, point2, point3);
 
-  // Translate point negative amount
+  // Print points
+  printPoint(point1);
+  printPoint(point2);
+  printPoint(point3);
+
+  // Translate point by negative 5
   point1.translate(-5);
 
   // Print point distances
   printPointDistances(point1, point2, point3);
+
+  // Print points
+  printPoint(point1);
+  printPoint(point2);
+  printPoint(point3);
 
   return 0;
 }
