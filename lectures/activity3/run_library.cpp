@@ -77,7 +77,9 @@ int main() {
   Book& book3Ref = book3;
   Book& book4Ref = book4;
 
-  // book3Ref == book4Ref
+  if (book3Ref == book4Ref) {
+    std::cout << true << std::endl;
+  }
 
   // 9) Create two Book pointers to your Books from # 7.
   // use the == operator to test if they are equal. What happens?
@@ -88,7 +90,9 @@ int main() {
   Book* book3Pointer = &book3;
   Book* book4Pointer = &book4;
 
-  // std::cout << book3Pointer == book4Pointer << std::endl;
+  if (book3Pointer == book4Pointer) {
+    std::cout << true << std::endl;
+  }
 
   // 10) (Given in lecture)
 

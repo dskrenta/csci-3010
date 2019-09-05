@@ -4,6 +4,11 @@
 struct Book {
   std::string title;
   std::string author;
+
+  // Implement bool Book::operator==(const Book& b)
+  bool operator==(const Book&  b);
+
+  friend std::ostream & operator<<(std::ostream & os, const Book & b);
 };
 
 
