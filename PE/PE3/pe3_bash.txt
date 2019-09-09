@@ -1,0 +1,30 @@
+Name: David Skrenta
+
+1) pwd
+2) touch empty.txt
+3) ls empty*
+4) ls *.txt | wc -l 
+5) 
+  echo "David Skrenta" >> empty.txt
+  > Redirects standard output
+  >> Appends to a file or creates it if it does not already exist
+6) mv empty.txt notempty.txt
+7) mkdir pe3_bash
+8) cd pe3_bash
+9) mkdir ../pe3_bash_number2
+10) cd ../pe3_bash_number2
+11) Allows you to move up through previous commands in chronological order
+12) Allows you to move down through previous commands in chronological order
+13) Allows you to navigate bash history with text search
+14)
+  vi) 
+    a) vi empty.txt
+    b) :w
+    c) :q
+  nano) 
+    a) nano empty.txt
+    b) ctrl+o
+    c) ctrl+x
+15)
+  - One reason could be you are on a server without a GUI
+  - Another reason to use these editors would be because they are faster, more efficient, and don't crash with larger files when compared to GUI text editors
