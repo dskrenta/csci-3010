@@ -70,4 +70,4 @@ zip -r lec5.zip lec5_directory
 ls lec5_directory/thisissilly/1?.silly
 
 2. Use the `less` command and the `cat` command on this file. What are the differences?
-cat outputs the contents of a file to standard output while less opens up a dedicated reader application
+cat outputs the contents of a file to standard output while less opens up a dedicated reader program
