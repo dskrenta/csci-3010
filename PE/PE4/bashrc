@@ -1,0 +1,22 @@
+# return the name of the current git branch if it exists
+get_git_branch() {
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* (*\([^)]*\))*/\1/'
+}
+
+# color the branch red or green depending on clean or dirty
+colorize_git_branch() {
+  # verify git branch is available
+  if [[ -n get_git_branch ]]; then
+    # check if branch is clean
+    if [[ -z $(git status --porcelain 2> /dev/null) ]]; then
+      # green branch name for clean branch
+      echo -e " \001\033[32m\002$(get_git_branch)\001\033[0m\002"
+    else
+      # red branch name for dirty branch
+      echo -e " \001\033[31m\002$(get_git_branch)\001\033[0m\002"
+    fi
+  fi
+}
+
+# export final PS1 with user and path included alongside git branch
+export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\] \[\033[33;1m\]\w\[\033[m\] \$(colorize_git_branch) \$ "
