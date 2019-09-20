@@ -16,13 +16,16 @@ void Maze::NewGame(Player *human, const int enemies) {
 
   // push new enemy players
   for (int i = 0; i < enemies; i++) {
-    Player enemy("enemy" + std::to_string(i), false);
-    players_.push_back(&enemy);
+    Player * enemy = new Player("enemy" + std::to_string(i), false);
+    players_.push_back(enemy);
   }
+
+  Player * firstPlayer = players_[0];
+  TakeTurn(firstPlayer);
 }
 
 void Maze::TakeTurn(Player *p) {
-  std::cout << board_ << std::endl;
+  std::cout << *board_ << std::endl;
 
   if (IsGameOver()) {
     std::cout << GenerateReport() << std::endl;
