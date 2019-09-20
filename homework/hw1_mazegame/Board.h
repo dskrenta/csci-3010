@@ -25,6 +25,7 @@ public:
 //	// set the value of a square to the given SquareType
 	void SetSquareValue(Position pos, SquareType value);
 //
+	bool IsValidPosition(Position pos);
 //	// get the possible Positions that a Player could move to
 //	// (not off the board or into a wall)
 	std::vector<Position> GetMoves(Player *p);

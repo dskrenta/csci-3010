@@ -28,6 +28,8 @@ public:
 //	// string info about the game's conditions after it is over
   std::string GenerateReport();
   // friend std::ostream& operator<<(std::ostream& os, const Maze &m);
+
+  bool Chance(int percentage);
 //
 private:
   Board *board_;
