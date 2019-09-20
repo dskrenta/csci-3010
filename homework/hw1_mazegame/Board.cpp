@@ -1,7 +1,11 @@
 #include "Board.h"
 
 Board::Board() {
-
+  for (int row = 0; row < Board::get_rows(); row++) {
+    for (int col = 0; col < Board::get_cols(); col++) {
+      arr_[row][col] = SquareType::Empty;
+    }
+  }
 }
 
 SquareType Board::get_square_value(Position pos) const {
@@ -81,3 +85,34 @@ bool Board::MovePlayer(Player *p, Position pos) {
 SquareType Board::GetExitOccupant() {
   return SquareType::Exit;
 }
+
+std::string Board::SquareTypeToEmoji(SquareType value) {
+  if (value == SquareType::Wall) {
+    return "🧱";
+  }
+  else if (value == SquareType::Exit) {
+    return "❎";
+  }
+  else if (value == SquareType::Human) {
+    return "😀";
+  }
+  else if (value == SquareType::Enemy) {
+    return "💣";
+  }
+  else if (value == SquareType::Treasure) {
+    return "🌟";
+  }
+  else {
+    return "⬜";
+  }
+}
+
+std::ostream& operator<<(std::ostream& os, const Board &b) {
+  for (int row = 0; row < b.get_rows(); row++) {
+    for (int col = 0; col < b.get_cols(); col++) {
+      os << Board::SquareTypeToEmoji(b.arr_[row][col]);
+    }
+    os << std::endl;
+  }
+  return os;
+} 

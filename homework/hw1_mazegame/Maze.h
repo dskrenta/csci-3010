@@ -27,7 +27,8 @@ public:
 //	// You probably want to implement these functions as well
 //	// string info about the game's conditions after it is over
   std::string GenerateReport();
-  // friend std::ostream& operator<<(std::ostream& os, const Maze &m);
+  
+  friend std::ostream& operator<<(std::ostream& os, const Maze &m);
 
   bool Chance(int percentage);
 //

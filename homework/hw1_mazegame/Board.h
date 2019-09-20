@@ -37,8 +37,9 @@ public:
 //	// Get the square type of the exit square
 	SquareType GetExitOccupant();
 //
+	static std::string SquareTypeToEmoji(SquareType value);
 //	// You probably want to implement this
-	// friend std::ostream& operator<<(std::ostream& os, const Board &b);
+	friend std::ostream& operator<<(std::ostream& os, const Board &b);
 
 private:
 	SquareType arr_[4][4];

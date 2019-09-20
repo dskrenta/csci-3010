@@ -11,7 +11,8 @@ int main() {
 
   // Create maze
   Maze maze;
-  maze.NewGame(&player, 2); 
+  // maze.NewGame(&player, 2); 
+  std::cout << maze << std::endl;
 
   return 0;
 }

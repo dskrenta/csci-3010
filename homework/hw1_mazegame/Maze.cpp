@@ -16,8 +16,12 @@ void Maze::NewGame(Player *human, const int enemies) {
     players_.push_back(&enemy);
   }
 
+  board_->SetSquareValue({0, 0}, SquareType::Human);
+
+/*
   for (int row = 0; row < board_->get_rows(); row++) {
     for (int col = 0; col < board_->get_cols(); col++) {
+      std::cout << row << col << std::endl;
       if (row == 0 && col == 0) {
         board_->SetSquareValue({row, col}, SquareType::Human);
       }
@@ -34,8 +38,12 @@ void Maze::NewGame(Player *human, const int enemies) {
         board_->SetSquareValue({row, col}, SquareType::Enemy);
         enemiesToAdd--;
       }
+      else {
+        board_->SetSquareValue({row, col}, SquareType::Empty);
+      }
     }
   }
+  */
 }
 
 void Maze::TakeTurn(Player *p) {
@@ -57,3 +65,8 @@ std::string Maze::GenerateReport() {
 bool Maze::Chance(int percentage) {
   return (rand() % 100) < percentage;
 }
+
+std::ostream& operator<<(std::ostream& os, const Maze &m) {
+  os << (*m.board_);
+  return os;
+} 
