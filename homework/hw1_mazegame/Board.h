@@ -5,7 +5,7 @@
 #include "Player.h"
 
 // you may change this enum as you need
-enum class SquareType { Wall, Exit, Empty, Human, Enemy, Treasure };
+enum class SquareType { Wall, Exit, Empty, Human, Enemy, TreasureSmall, TreasureMedium, TreasureLarge };
 
 // TODO: implement
 std::string SquareTypeStringify(SquareType sq);

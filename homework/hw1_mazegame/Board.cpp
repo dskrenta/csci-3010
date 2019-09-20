@@ -14,7 +14,13 @@ Board::Board(int numEnemies) {
         arr_[row][col] = SquareType::Wall;
       }
       else if (Maze::Chance(10)) {
-        arr_[row][col] = SquareType::Treasure;
+        arr_[row][col] = SquareType::TreasureSmall;
+      }
+      else if (Maze::Chance(7)) {
+        arr_[row][col] = SquareType::TreasureMedium;
+      }
+      else if (Maze::Chance(5)) {
+        arr_[row][col] = SquareType::TreasureLarge;
       }
       else if (numEnemies > 0) {
         arr_[row][col] = SquareType::Enemy;
@@ -62,11 +68,41 @@ std::vector<Position> Board::GetMoves(Player *p) {
 }
 
 bool Board::MovePlayer(Player *p, Position pos) {
-  if (Board::IsValidPosition(pos)) {
-    p->SetPosition(pos);
-    return true;
+  Position current_pos = p->get_position();
+  SquareType next_square = arr_[pos.row][pos.col];
+
+  if (next_square == SquareType::TreasureSmall) {
+    p->ChangePoints(100);
+  } 
+  else if (next_square == SquareType::TreasureMedium) {
+    p->ChangePoints(500);
+  }
+  else if (next_square == SquareType::TreasureLarge) {
+    p->ChangePoints(1000);
   }
 
+  if (p->is_human()) {
+    if (next_square == SquareType::Enemy) {
+      arr_[pos.row][pos.col] = SquareType::Enemy;
+    }
+    else if (next_square == SquareType::Exit) {
+      std::cout << "You Win!" << std::endl;
+    }
+    else {
+      arr_[pos.row][pos.col] = SquareType::Human;
+      p->SetPosition(pos);
+    }
+    arr_[current_pos.row][current_pos.col] = SquareType::Empty;
+  }
+  else {
+    arr_[current_pos.row][current_pos.col] = SquareType::Empty;
+    arr_[pos.row][pos.col] = SquareType::Enemy;
+    p->SetPosition(pos);
+  }
+
+  if (p->get_position() == pos) {
+    return true;
+  }
   return false;
 }
 
@@ -87,8 +123,14 @@ std::string Board::SquareTypeToEmoji(SquareType value) {
   else if (value == SquareType::Enemy) {
     return "💣";
   }
-  else if (value == SquareType::Treasure) {
+  else if (value == SquareType::TreasureSmall) {
     return "🌟";
+  }
+  else if (value == SquareType::TreasureMedium) {
+    return "🔥";
+  }
+  else if (value == SquareType::TreasureLarge) {
+    return "🍅";
   }
   else {
     return "⬜";
