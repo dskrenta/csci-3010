@@ -95,6 +95,18 @@ std::string Board::SquareTypeToEmoji(SquareType value) {
   }
 }
 
+bool Board::HumanOnBoard() {
+  for (int row = 0; row < get_rows(); row++) {
+    for (int col = 0; col < get_cols(); col++) {
+      if (arr_[row][col] == SquareType::Human) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+
 std::ostream& operator<<(std::ostream& os, const Board &b) {
   os << std::endl;
   for (int row = 0; row < b.get_rows(); row++) {

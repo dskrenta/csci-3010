@@ -31,6 +31,8 @@ public:
   friend std::ostream& operator<<(std::ostream& os, const Maze &m);
 
   static bool Chance(int percentage);
+
+  static bool StringEqual(std::string s1, std::string s2);
 //
 private:
   Board *board_;

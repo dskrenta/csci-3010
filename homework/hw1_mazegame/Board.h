@@ -36,6 +36,7 @@ public:
 //	// true if they moved successfully, false otherwise.
 	bool MovePlayer(Player *p, Position pos);
 //
+	bool HumanOnBoard();
 //	// Get the square type of the exit square
 	SquareType GetExitOccupant();
 //
