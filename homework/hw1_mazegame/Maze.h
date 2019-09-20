@@ -30,7 +30,7 @@ public:
   
   friend std::ostream& operator<<(std::ostream& os, const Maze &m);
 
-  bool Chance(int percentage);
+  static bool Chance(int percentage);
 //
 private:
   Board *board_;

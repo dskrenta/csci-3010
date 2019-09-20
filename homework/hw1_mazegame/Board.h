@@ -13,7 +13,7 @@ std::string SquareTypeStringify(SquareType sq);
 class Board {
 public:
 	// TODO: implement
-	Board();
+	Board(int numEnemies);
 
 	// already implemented in line
 	int get_rows() const { return 4; }  // you should be able to change the size of your
@@ -25,6 +25,8 @@ public:
 //	// set the value of a square to the given SquareType
 	void SetSquareValue(Position pos, SquareType value);
 //
+	// void PopulateCells(int numEnemies);
+
 	bool IsValidPosition(Position pos);
 //	// get the possible Positions that a Player could move to
 //	// (not off the board or into a wall)

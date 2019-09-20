@@ -1,9 +1,28 @@
+#include "Maze.h"
 #include "Board.h"
 
-Board::Board() {
+Board::Board(int numEnemies) {
   for (int row = 0; row < Board::get_rows(); row++) {
     for (int col = 0; col < Board::get_cols(); col++) {
-      arr_[row][col] = SquareType::Empty;
+      if (row == 0 && col == 0) {
+        arr_[row][col] = SquareType::Human;
+      }
+      else if (row == 3 && col == 3) {
+        arr_[row][col] = SquareType::Exit;
+      }
+      else if (Maze::Chance(20)) {
+        arr_[row][col] = SquareType::Wall;
+      }
+      else if (Maze::Chance(10)) {
+        arr_[row][col] = SquareType::Treasure;
+      }
+      else if (numEnemies > 0) {
+        arr_[row][col] = SquareType::Enemy;
+        numEnemies--;
+      }
+      else {
+       arr_[row][col] = SquareType::Empty;
+      }
     }
   }
 }
@@ -38,37 +57,6 @@ std::vector<Position> Board::GetMoves(Player *p) {
       possibleMoves.erase(possibleMoves.begin() + i);
     }
   }
-
-  /*
-  int up = playerPos.row + 1;
-  int down = playerPos.row - 1;
-  int right = playerPos.col + 1;
-  int left = playerPos.col - 1;
-
-  if (up >= 0 && up <= lastRow && Board::get_square_value({row: up, col: playerPos.col}) != SquareType::Wall) {
-    possibleMoves.push_back({row: up, col: playerPos.col});
-  }
-  else if (down >= 0 && down <= lastRow) {
-    possibleMoves.push_back({row: down, col: playerPos.col});
-  }
-  else if (right >= 0 && right <= lastCol) {
-    possibleMoves.push_back({row: playerPos.row, col: right});
-  }
-  else if (left >= 0 && left <= lastCol) {
-    possibleMoves.push_back({row: playerPos.row, col: left});
-  }
-  */
-
- /*
-  int lastRow = Board::get_rows() - 1;
-  int lastCol = Board::get_cols() - 1;
-
- possibleMoves[i].row < 0 || 
-      possibleMoves[i].col < 0 || 
-      possibleMoves[i].row > lastRow || 
-      possibleMoves[i].col > lastCol || 
-      Board::get_square_value(possibleMoves[i]) == SquareType::Wall
- */
 
   return possibleMoves;
 }
@@ -108,9 +96,10 @@ std::string Board::SquareTypeToEmoji(SquareType value) {
 }
 
 std::ostream& operator<<(std::ostream& os, const Board &b) {
+  os << std::endl;
   for (int row = 0; row < b.get_rows(); row++) {
     for (int col = 0; col < b.get_cols(); col++) {
-      os << Board::SquareTypeToEmoji(b.arr_[row][col]);
+      os << Board::SquareTypeToEmoji(b.arr_[row][col]) << " ";
     }
     os << std::endl;
   }
