@@ -1,6 +1,11 @@
 #include "Maze.h"
 #include "Board.h"
 
+/**
+    Board constructor
+
+    @param numEnemies Number of enemies to start with
+*/
 Board::Board(int numEnemies) {
   for (int row = 0; row < Board::get_rows(); row++) {
     for (int col = 0; col < Board::get_cols(); col++) {
@@ -33,14 +38,32 @@ Board::Board(int numEnemies) {
   }
 }
 
+/**
+    Returns the SquareType of a position
+
+    @param pos Position.
+    @return SquareType of passed position.
+*/
 SquareType Board::get_square_value(Position pos) const {
   return arr_[pos.row][pos.col];
 } 
 
+/**
+    Sets a square value.
+
+    @param pos Position.
+    @param value SquareType
+*/
 void Board::SetSquareValue(Position pos, SquareType value) {
   arr_[pos.row][pos.col] = value;
 }
 
+/**
+    Returns boolean based on if given position is valid for a player.
+
+    @param pos Position.
+    @return Boolean value.
+*/
 bool Board::IsValidPosition(Position pos) {
   return pos.row < 0 || 
     pos.col < 0 || 
@@ -49,6 +72,12 @@ bool Board::IsValidPosition(Position pos) {
     Board::get_square_value(pos) == SquareType::Wall;
 }
 
+/**
+    Returns a vector with the possible moves given a player.
+
+    @param p The player.
+    @return Vector of possible moves.
+*/
 std::vector<Position> Board::GetMoves(Player *p) {
   Position playerPos = p->get_position();
   std::vector<Position> possibleMoves {
@@ -67,10 +96,18 @@ std::vector<Position> Board::GetMoves(Player *p) {
   return possibleMoves;
 }
 
+/**
+    Moves player to new given location
+
+    @param p Player.
+    @param pos Position.
+    @return Success boolean.
+*/
 bool Board::MovePlayer(Player *p, Position pos) {
   Position current_pos = p->get_position();
   SquareType next_square = arr_[pos.row][pos.col];
 
+  // Treasure point assignments
   if (next_square == SquareType::TreasureSmall) {
     p->ChangePoints(100);
   } 
@@ -81,35 +118,52 @@ bool Board::MovePlayer(Player *p, Position pos) {
     p->ChangePoints(1000);
   }
 
+  // Player is human
   if (p->is_human()) {
+    // Player is about to move on enemy
     if (next_square == SquareType::Enemy) {
       arr_[pos.row][pos.col] = SquareType::Enemy;
     }
+    // Player is about to move on exit
     else if (next_square == SquareType::Exit) {
       std::cout << "You Win!" << std::endl;
     }
+    // Player is moving to a regular square
     else {
       arr_[pos.row][pos.col] = SquareType::Human;
       p->SetPosition(pos);
     }
     arr_[current_pos.row][current_pos.col] = SquareType::Empty;
   }
+  // Player is enemy
   else {
     arr_[current_pos.row][current_pos.col] = SquareType::Empty;
     arr_[pos.row][pos.col] = SquareType::Enemy;
     p->SetPosition(pos);
   }
 
+  // If player moved, return true
   if (p->get_position() == pos) {
     return true;
   }
   return false;
 }
 
+/**
+    Returns the SqureType of the exit square.
+
+    @return SquareType of the exit square.
+*/
 SquareType Board::GetExitOccupant() {
   return SquareType::Exit;
 }
 
+/**
+    Returns an emoji contained within a string given a SquareType.
+
+    @param value SquareType.
+    @return String containing emoji.
+*/
 std::string Board::SquareTypeToEmoji(SquareType value) {
   if (value == SquareType::Wall) {
     return "🧱";
@@ -137,6 +191,11 @@ std::string Board::SquareTypeToEmoji(SquareType value) {
   }
 }
 
+/**
+    Returns boolean based on if board contains a human.
+
+    @return Boolean based on if board contains a human.
+*/
 bool Board::HumanOnBoard() {
   for (int row = 0; row < get_rows(); row++) {
     for (int col = 0; col < get_cols(); col++) {
@@ -149,6 +208,13 @@ bool Board::HumanOnBoard() {
   return false;
 }
 
+/**
+    Overloads << for Board.
+
+    @param os Standard output.
+    @param b Board.
+    @return Standard output.
+*/
 std::ostream& operator<<(std::ostream& os, const Board &b) {
   os << std::endl;
   for (int row = 0; row < b.get_rows(); row++) {
