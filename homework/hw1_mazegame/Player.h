@@ -1,7 +1,7 @@
-#include <iostream>
 #ifndef _PLAYER_H_
 #define _PLAYER_H_
 
+#include <iostream>
 
 struct Position {
 	int row;
@@ -12,11 +12,6 @@ struct Position {
 		return row == other.row && col == other.col;
 	}
 };
-
-std::ostream & operator<<(std::ostream & os, const Position & p) {
-  os << p.row << " rows by " << p.col << " cols" << std::endl;
-  return os;
-}
 
 
 class Player {
@@ -49,8 +44,8 @@ public:
 
 private:
 	std::string name_;
-	int points_;
-	Position pos_;
+	int points_ = 0;
+	Position pos_{row: 0, col: 0};
 	bool is_human_;
 
 	// You may add other fields as needed

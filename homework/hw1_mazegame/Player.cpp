@@ -10,5 +10,5 @@ void Player::SetPosition(Position pos) {
 }
 
 std::string Player::Stringify() {
-  std::cout << "Name: " << name_ << ", Points: " << points_ << ", Position: " << pos_ << ", Is Human: " << is_human_ << std::endl;
+  return "Name: " + name_ + ", Points: " + std::to_string(points_) + ", Position: (" + std::to_string(pos_.row) + ", " + std::to_string(pos_.col) + "), Is Human: " + std::to_string(is_human_);
 }
