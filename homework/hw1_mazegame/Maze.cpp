@@ -43,18 +43,21 @@ void Maze::NewGame(Player *human, const int enemies) {
 void Maze::TakeTurn(Player *p) {
   std::cout << *board_ << std::endl;
 
+  // If game is done, print report
   if (IsGameOver()) {
     std::cout << GenerateReport() << std::endl;
   }
   else {
     std::vector<Position> possibleMoves = board_->GetMoves(p);
 
+    // Get relative positions for possible moves
     std::cout << p->get_name() << " can move: ";
     for (Position pos: possibleMoves) {
       std::cout << p->ToRelativePosition(pos) << ", ";
     }
     std::cout << std::endl;
 
+    // Continue standard input until valid value is passed
     Position chosen_move;
     bool input_is_valid = false;
     while (!input_is_valid) {
@@ -71,8 +74,10 @@ void Maze::TakeTurn(Player *p) {
       }
     }
 
+    // Move player to new desired position
     board_->MovePlayer(p, chosen_move);
 
+    // Increment turn, get next player, begin next turn
     turn_count_++;
     Player * next_player = GetNextPlayer();
     TakeTurn(next_player);
