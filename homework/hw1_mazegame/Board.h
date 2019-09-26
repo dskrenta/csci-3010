@@ -1,50 +1,67 @@
+/**
+David Skrenta
+Homework 1
+Board header file
+*/
+
 #ifndef _BOARD_H_
 #define _BOARD_H_
 
+#include <vector>
 #include "Player.h"
 
-// you may change this enum as you need
-enum class SquareType { Wall, Exit, Empty, Human, Enemy, Treasure };
-
-// TODO: implement
-std::string SquareTypeStringify(SquareType sq);
+// Enumeration for types of squares
+enum class SquareType { 
+	Wall, 
+	Exit, 
+	Empty, 
+	Human, 
+	Enemy, 
+	TreasureSmall, 
+	TreasureMedium, 
+	TreasureLarge 
+};
 
 class Board {
-public:
-	// TODO: implement
-	Board();
+	public:
+		// Constructor
+		Board(int numEnemies);
 
-	// already implemented in line
-	int get_rows() const { return 4; }  // you should be able to change the size of your
-	int get_cols() const { return 4; }  // board by changing these numbers and the numbers in the arr_ field
+		// Returns rows
+		int get_rows() const { return 4; }
+		
+		// Returns cols
+		int get_cols() const { return 4; }
 
-//	// TODO: you MUST implement the following functions
-//	SquareType get_square_value(Position pos) const;
-//
-//	// set the value of a square to the given SquareType
-//	void SetSquareValue(Position pos, SquareType value);
-//
-//	// get the possible Positions that a Player could move to
-//	// (not off the board or into a wall)
-//	std::vector<Position> GetMoves(Player *p);
-//
-//	// Move a player to a new position on the board. Return
-//	// true if they moved successfully, false otherwise.
-//	bool MovePlayer(Player *p, Position pos);
-//
-//	// Get the square type of the exit square
-//	SquareType GetExitOccupant();
-//
-//	// You probably want to implement this
-// friend std::ostream& operator<<(std::ostream& os, const Board &b);
+		// Get SquareType from 2D position
+		SquareType get_square_value(Position pos) const;
 
-private:
-	SquareType arr_[4][4];
+		// Set square value given a 2D position and a SquareType value
+		void SetSquareValue(Position pos, SquareType value);
 
-	int rows_; // might be convenient but not necessary
-	int cols_;
+		// Boolean value is returned based on passed position being a valid position for a player to move to 
+		bool IsValidPosition(Position pos);
 
-	// you may add more fields, as needed
+		// Returns a vector of moves given a player
+		std::vector<Position> GetMoves(Player *p);
+
+		// Given a player and a position this function moves the player 
+		bool MovePlayer(Player *p, Position pos);
+
+		// Boolean based on if there is a human on the board
+		bool HumanOnBoard();
+
+		// Returns SquareType of the exit square
+		SquareType GetExitOccupant();
+
+		// Returns an emoji contained in a string given a SquareType
+		static std::string SquareTypeToEmoji(SquareType value);
+
+		// Overloads << for Board
+		friend std::ostream& operator<<(std::ostream& os, const Board &b);
+
+	private:
+		SquareType arr_[4][4];
 }; // class Board
 
 #endif  // _BOARD_H_

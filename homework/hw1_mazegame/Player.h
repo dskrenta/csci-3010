@@ -1,60 +1,58 @@
-#include <iostream>
+/**
+David Skrenta
+Homework 1
+Player header file
+*/
+
 #ifndef _PLAYER_H_
 #define _PLAYER_H_
 
+#include <iostream>
 
+// Struct to represent position in 2D array
 struct Position {
 	int row;
 	int col;
 
-	// already implemented for you!
 	bool operator==(const Position & other) {
 		return row == other.row && col == other.col;
 	}
 };
 
-std::ostream & operator<<(std::ostream & os, const Position & p) {
-  os << p.row << " rows by " << p.col << " cols" << std::endl;
-  return os;
-}
-
-
 class Player {
-public:
-	// TODO: implement
-	Player(const std::string name, const bool is_human): name_(name), is_human_(is_human) {}  // constructor
+	public:
+		// Constructor
+		Player(const std::string name, const bool is_human): name_(name), is_human_(is_human) {}
 
-	// These are already implemented for you
-	std::string get_name() const { return name_; }  // inline member function
-	int get_points() const { return points_; }  // inline member function
-	Position get_position() const { return pos_; }  // inline member function
-	bool is_human() const { return is_human_; }  // inline member function
+		// Returns player name
+		std::string get_name() const { return name_; }
 
-//	// TODO: implement the following functions
-//	// You MUST implement the following functions
-  void ChangePoints(const int x);
-//
-//	// set a new position for this player
-  void SetPosition(Position pos);
-//
-//	// You may want to implement these functions as well
-//	// ToRelativePosition is a function we used to translate positions
-//	// into directions relative to the player (up, down, etc)
-//	std::string ToRelativePosition(Position other);
-//
-//	// Convert this player to a string representation of their name and points
-  std::string Stringify();
-//
-//	// You may add other functions as needed/wanted
+		// Returns player points
+		int get_points() const { return points_; }
 
-private:
-	std::string name_;
-	int points_;
-	Position pos_;
-	bool is_human_;
+		// Returns player position
+		Position get_position() const { return pos_; }
 
-	// You may add other fields as needed
+		// Returns boolean based on if player is human
+		bool is_human() const { return is_human_; }
 
+		// Given an int, changes player points
+		void ChangePoints(const int x);
+
+		// Given a position, changes player position
+		void SetPosition(Position pos);
+
+		// Converts a position to a string based relative position
+		std::string ToRelativePosition(Position other);
+		
+		// Converts player to string
+		std::string Stringify();
+
+	private:
+		std::string name_;
+		int points_ = 0;
+		Position pos_{row: 0, col: 0};
+		bool is_human_;
 }; // class Player
 
 #endif  // _PLAYER_H_
