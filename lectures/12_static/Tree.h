@@ -1,6 +1,8 @@
 #ifndef _TREE_H_
 #define _TREE_H_
 
+// Names: David Skrenta
+
 class Tree {
     public:
         Tree() { number_instances_++; }

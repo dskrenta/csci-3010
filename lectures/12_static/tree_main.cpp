@@ -3,8 +3,6 @@
 #include "Tree.h"
 
 // Names: David Skrenta
-//
-
 
 int main() {
     Tree oak;
