@@ -1,6 +1,7 @@
 #ifndef _EARTH_H_
 #define _EARTH_H_
 
+// Names: David Skrenta
 
 class Earth {
 public:

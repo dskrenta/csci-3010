@@ -1,6 +1,7 @@
 #include <iostream>
-
 #include "Earth.h"
+
+// Names: David Skrenta
 
 Earth::Earth() {
     // Implement your constructor here

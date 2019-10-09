@@ -1,8 +1,7 @@
 #include <iostream>
 #include "Earth.h"
 
-// Names:
-//
+// Names: David Skrenta
 
 int main(int argc, char **argv){
     // 0) Implement your Earth's constructor in Earth.cpp
