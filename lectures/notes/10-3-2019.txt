@@ -1,0 +1,9 @@
+static c++ keyword
+  shared information (data/behavoir)
+  static field - a field for which we have one copy for all instances
+  static fields can be accessed in any method
+  static methods - a method that belongs the class rather than an instance
+    no this
+    no non-static fields
+  Tree * aspen = new Aspen();
+  aspen->Seed(); // if dynamic dispatch is working will call Aspen's seed
