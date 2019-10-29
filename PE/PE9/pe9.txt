@@ -1,0 +1,31 @@
+Name: David Skrenta
+
+What are 3 specific tools/techniques that Haben Girma talks about that deaf and deafblind individuals use to communicate?
+  Apple keyboard to digital braille display, sign language, and print on palms.
+What are 3 kinds of rights that Helen Keller advocated for? Why does Haben Girma talk about Helen Keller?
+  Women’s rights, disability rights, and workers rights.
+According to Haben Girma, why do barriers exist? Name one barrier you have observed and one thing you think could be done to lower it.
+  Barriers are created by society. Not all websites have accessibility features enabled. One possibility would be to build a browser extension that automatically inserts those tools on websites
+What are 3 different accessibility features that Haben Girma references specific to software/computer technology?
+  Screen reader - Voice Over, dynamic type, and captioning.
+When should you start planning on incorporating accessibility features into your application? What metaphor does Girma use to illustrate this point?
+  At every stage. Imagine someone builds a skyscraper but forgets to put in an elevator, tears it down and builds a new one with an elevator. Would have been much easier to build it first with the skyscraper. 
+Who does accessibility increase access for? How?
+  Accessibility increases access for those with disabilities. 
+What are the two inventions that Girma mentions that were originally invented to address issues of accessibility?
+  Captioning on online videos and keyboards - touch typing.
+What is the last area that Haben Girma mentions as a place where we rarely seek innovation but has a lot of potential? Why does she say that this area has a lot of potential?
+  Accessibility innovations. 20% of Americans have a disability meaning it is a large market
+Pick a website that you visit at least once a week. Answer the following questions about that website. Use complete sentences.
+  Google Search
+
+What is the website? (doesn't have to be a complete sentence)
+   Google Search
+What are three aspects of this website that help it be more accessible?
+  Designed with screen readers in mind, custom accessibility keystrokes, screen magnifier, and spoken feedback.
+What are the accessibility critiques of this website? Do research to find reports about how well tools such as screen readers work on this site. Summarize the critiques you find and link your sources in your answer.
+  Make it personal - make it stick, make it universal and flexible, small changes = big impact, money talks, and aim for industry standards. 
+  Overall this was a positive review of the Google Search accessibility features.  
+  https://medium.com/google-design/making-the-case-for-accessibility-350da9e30c84
+Propose some changes to the site that might address the critiques in #3. What are the pros/cons of these changes?
+  A proposed change would be to further bridge the accessibility features with the regular features in order to create a single experience. The pros would be the accessibility features get many more updates than they otherwise would have. The cons would be concessions would have to be made on both sides in order for a compromise.
