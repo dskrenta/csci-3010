@@ -1,0 +1,111 @@
+Name(s): David Skrenta
+
+Simple-Web-Server: https://gitlab.com/eidheim/Simple-Web-Server
+
+
+Link: http://cs1200-web.cs.colorado.edu:8080
+
+-----------------------------------------
+Exploring the API (look at messenger.cpp)
+-----------------------------------------
+
+1. What endpoints are available? What kind of requests do they accept? What url parameters can they take? What format should the data be in for each endpoint?
+
+  GET /chatrooms - receives a plain-text content payload
+  POST /createroom - takes a POSTed string - receives a plain-text content payload
+  POST /message - { name: String, room: String, message: String } - receives a JSON-formatted payload
+
+--------------------------------------------------------------------------
+Using curl, do the following tasks. Copy+paste the commands you used below
+--------------------------------------------------------------------------
+
+Here are flags that you may find useful:
+-i (--include) include the HTTP-header in the output
+-X (--request) specifies what kind of request to make
+-d (--data) specifies what data to send along with your request
+-H (--header) specifies a header to send along with the request
+
+Here is the general format:
+curl -i -X TYPE http://cs1200-web.cs.colorado.edu:8080/ [--data YOUR_DATA_HERE] [--header YOUR_HEADERS_HERE]
+(don't include the square brackets, they are indicating that you don't need to include these pieces for all requests)
+
+1. Get a list of available chat rooms
+
+  curl -i -X GET http://localhost:8080/chatrooms
+
+2. Create a new chat room
+
+  curl -i -X POST http://localhost:8080/createroom -d 'some_chatroom_name'
+
+3. Post a message in a chat room
+hint: when POSTing JSON, you'll need to include the header "Content-Type: application/json"
+hint2: when formatting your JSON, format it like: '{"field1": "value1", "field2": "value2"}'
+Hint 3: do include the quotations in your curl request!
+
+  curl -i -X POST http://localhost:8080/message -d '{"name": "David", "room": "some_chatroom_name", "message": "Sample message."}'
+
+4. Display the contents of a chat room
+
+
+--------------------------------------------------------------------------
+Using a browser extension such as Postman, HttpRequester, Insomnia, etc...
+--------------------------------------------------------------------------
+
+Do tasks 1 - 4, using the browser extension of your choice.
+
+What are advantages/disadvantages of using curl versus the extension that you used?
+
+  Curl is faster, always available, and does not hide any information.
+  Some advantages of the extensions above is the formatted they do for you in terms of request parameters and responses.
+  Some people dislike curl's API.
+
+-------------------------
+Improving our web service
+-------------------------
+Take the provided code and modify messenger.cpp.
+
+The steps for building are the same as for Simple-Web-Server (https://gitlab.com/eidheim/Simple-Web-Server.git)
+
+
+1. Make it so that if a user tries to create a room that already exists, that room isn't re-created. Copy + paste your modified /createroom endpoint here.
+
+  // Simple utility to check file existence
+  bool is_file_exist(const char *fileName) {
+      std::ifstream infile(fileName);
+      return infile.good();
+  }
+
+  // POST-example for the path /createroom
+  // receives a plain-text content payload
+  server.resource["^/createroom$"]["POST"] = [](shared_ptr<HttpServer::Response> response, shared_ptr<HttpServer::Request> request) {
+    LogRequestInfo(request);
+
+    // Retrieve string:
+    string content = request->content.string();
+    string filename = content + ".txt";
+
+    // Don't overwrite the file
+    if (!is_file_exist(filename.data())) {
+      std::cout << "File does not exist: " << filename << std::endl;
+
+      // create a new blank chatroom with this name
+      ofstream outfile(filename);
+      outfile << "" << std::endl;
+      outfile.close();
+
+      // add this chatroom to the list of chatrooms
+      ofstream rooms_outfile;
+      rooms_outfile.open(GetChatRoomsFile(), std::ios_base::app);
+      rooms_outfile << content << endl;
+      rooms_outfile.close();
+    }
+
+    *response << "HTTP/1.1 200 OK\r\nContent-Length: " << content.length() << "\r\n\r\n"
+              << content;
+
+
+    // Alternatively, use one of the convenience functions, for instance:
+    // response->write(content);
+  };
+
+2. Add more endpoints of your own. Copy & paste the code that you've added here.
