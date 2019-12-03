@@ -110,6 +110,7 @@ int main() {
       stream << "<h2>Available Chat Rooms</h2>";
       stream << "<ul>";
       for (string room : rooms) {
+        // Added link to chatroom in chatroom list
         stream << "<li><a href=\"http://localhost:8080/chatrooms?room=" << room << "\">" << room << "</a></li>";
       }
       stream << "</ul>";
@@ -179,7 +180,8 @@ int main() {
     // response->write(content);
   };
 
-  // TODO: PE 14 add the annouce endpoint here!
+  // Announce endpoint
+  // Takes a json-formatted payload { name: String, messsage: String }
   server.resource["^/announce$"]["POST"] = [](shared_ptr<HttpServer::Response> response, shared_ptr<HttpServer::Request> request) {
     LogRequestInfo(request);
 
@@ -192,6 +194,7 @@ int main() {
       string name = pt.get<string>("name");
       string message = pt.get<string>("message");
 
+      // Loop through all rooms, post announcement
       for (string room : rooms) {
         cout << "Adding announcement to room: " << room << endl;
         cout << "ANNOUNCEMENT<" << name << ">" << ": " << message << endl;
