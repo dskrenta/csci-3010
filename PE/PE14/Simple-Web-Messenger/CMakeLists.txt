@@ -6,6 +6,10 @@ option(USE_STANDALONE_ASIO "set ON to use standalone Asio instead of Boost.Asio"
 option(BUILD_TESTING "set ON to build library tests" OFF)
 option(USE_OPENSSL "set OFF to build without OpenSSL" ON)
 
+# issue with homebrew installs for both multi-threaded and single-threaded boost
+# hopefully fixed with next boost release
+set(Boost_NO_BOOST_CMAKE ON)
+
 if(NOT MSVC)
     add_compile_options(-std=c++11 -Wall -Wextra)
     if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
@@ -63,23 +67,12 @@ endif()
 if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
     find_package(Boost 1.53.0 COMPONENTS system thread filesystem)
     if(Boost_FOUND)
-        add_executable(http_examples http_examples.cpp)
-        target_link_libraries(http_examples simple-web-server)
-        target_link_libraries(http_examples ${Boost_LIBRARIES})
-        target_include_directories(http_examples PRIVATE ${Boost_INCLUDE_DIR})
-        if(OPENSSL_FOUND)
-            add_executable(https_examples https_examples.cpp)
-            target_link_libraries(https_examples simple-web-server)
-            target_link_libraries(https_examples ${Boost_LIBRARIES})
-            target_include_directories(https_examples PRIVATE ${Boost_INCLUDE_DIR})
-        endif()
+        add_executable(messenger messenger.cpp)
+        target_link_libraries(messenger simple-web-server)
+        target_link_libraries(messenger ${Boost_LIBRARIES})
+        target_include_directories(messenger PRIVATE ${Boost_INCLUDE_DIR})
      endif()
     set(BUILD_TESTING ON)
 
     install(FILES asio_compatibility.hpp server_http.hpp client_http.hpp server_https.hpp client_https.hpp crypto.hpp utility.hpp status_code.hpp mutex.hpp DESTINATION include/simple-web-server)
-endif()
-
-if(BUILD_TESTING)
-    enable_testing()
-    add_subdirectory(tests)
 endif()
