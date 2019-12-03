@@ -194,7 +194,7 @@ int main() {
 
       for (string room : rooms) {
         cout << "Adding announcement to room: " << room << endl;
-        cout << "ANNOUNCEMENT<" << name << ">:" << name << ": " << message << endl;
+        cout << "ANNOUNCEMENT<" << name << ">" << ": " << message << endl;
 
         // add this message to the appropriate chatroom
         ofstream rooms_outfile;
